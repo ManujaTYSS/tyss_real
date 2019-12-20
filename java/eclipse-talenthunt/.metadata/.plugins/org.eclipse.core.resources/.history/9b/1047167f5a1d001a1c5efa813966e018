@@ -1,0 +1,12 @@
+package com.tyss.talenthunt.service;
+
+import java.util.List;
+
+import com.tyss.talenthunt.dto.AddRequirment;
+import com.tyss.talunthunt.dto.AddRequirements;
+
+public interface AddRequirmentServiceInterface {
+	public AddRequirements addrequirement(AddRequirements reqinfo);
+	public boolean updateRequirment(AddRequirements reqinfo);
+	public List<AddRequirements> getAllRequirements();
+}

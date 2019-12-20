@@ -1,0 +1,147 @@
+package com.tyss.talenthunt.controller;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tyss.talenthunt.dto.AddRequirment;
+import com.tyss.talenthunt.dto.CandidateCreation;
+import com.tyss.talenthunt.dto.CustomIdGenerator;
+import com.tyss.talenthunt.dto.Response;
+import com.tyss.talenthunt.service.AddRequirmentServiceInterface;
+
+@CrossOrigin(origins = "*", allowedHeaders = "*", allowCredentials = "true")
+@RestController
+@RequestMapping("/talenthunt")
+public class RequirmentController {
+	@Autowired
+	private AddRequirmentServiceInterface service;
+	@Autowired
+	private CustomIdGenerator generator;
+
+	@InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		CustomDateEditor editor = new CustomDateEditor(format, true);
+		binder.registerCustomEditor(Date.class, editor);
+	}
+
+	@PostMapping(path = "/addrequirement", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Response registerAddrequirement(@RequestBody AddRequirment reqinfo) {
+		Response response = new Response();
+
+		if (generator.generator(reqinfo)) {
+			AddRequirment info = service.addrequirement(reqinfo);
+			response.setStatusCode(200);
+			response.setMessage("Requirement has been registered successfully");
+
+		} else {
+			response.setStatusCode(400);
+			response.setMessage(" adding requirement  failed");
+		}
+
+		return response;
+	}
+
+	@PutMapping(path = "/update", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Response updateAddRequirment(@RequestBody AddRequirment reqinfo) {
+		Response response = new Response();
+		if (service.updateRequirment(reqinfo)) {
+			response.setStatusCode(200);
+			response.setMessage("Requirment has been updated successfully");
+		} else {
+			response.setStatusCode(400);
+			response.setMessage("updating requirement  failed");
+		}
+		return response;
+	}
+
+	@GetMapping(path = "/get-all", produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public Response getAllRequirment(HttpServletRequest request) {
+		Response response = new Response();
+
+		List<AddRequirment> req = service.getAllRequirements();
+		if (req != null) {
+			response.setStatusCode(200);
+			response.setMessage("Success");
+			response.setAdd(req);
+			return response;
+		} else {
+			response.setStatusCode(400);
+			response.setMessage("Failure");
+			return response;
+		}
+	}
+
+	@PostMapping(path = "/registerCandidate", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Response registerCandidate(@RequestBody CandidateCreation candidateInfo) {
+		Response response = new Response();
+		CandidateCreation creation = service.addCandidate(candidateInfo);
+		if (creation != null) {
+			response.setStatusCode(200);
+			response.setMessage("Requirement has been registered successfully");
+		} else {
+			response.setStatusCode(400);
+			response.setMessage(" adding requirement  failed");
+		}
+		return response;
+	}
+
+	@PostMapping(path = "/createCandidate", produces = MediaType.APPLICATION_JSON_VALUE)
+	public TalentHubtResponse createCandidates(@RequestHeader String cname, @RequestHeader String email,
+			@RequestHeader String govtId, @RequestHeader long number, @RequestParam("file") MultipartFile file,
+			@RequestHeader String reLocate, @RequestHeader String fresher, @RequestHeader String experience,
+			@RequestHeader String currentDeesignation, @RequestHeader double currentCtc,
+			@RequestHeader double expectedCtc, @RequestHeader String noticePeriod, @RequestHeader int yoe,
+			@RequestHeader Date passedOutYear, @RequestHeader double percentage) throws IOException {
+		TalentHubtResponse talentHubtResponse = new TalentHubtResponse();
+		System.out.println(cname);
+		System.out.println(email);
+		System.out.println(file);
+		File confile = new File(file.getOriginalFilename());
+		FileOutputStream fout = new FileOutputStream(confile);
+		fout.write(file.getBytes());
+		fout.close();
+		CandidateInfoBean candidate = new CandidateInfoBean();
+		candidate.setCname(cname);
+		candidate.setEmail(email);
+		candidate.setGovtId(govtId);
+		candidate.setNumber(number);
+		candidate.setUploadResume(confile);
+		candidate.setReLocate(reLocate);
+		candidate.setFresher(fresher);
+		candidate.setExperience(experience);
+		candidate.setCurrentDeesignation(currentDeesignation);
+		candidate.setCurrentCtc(currentCtc);
+		candidate.setExpectedCtc(expectedCtc);
+		candidate.setNoticePeriod(noticePeriod);
+		candidate.setPassedOutYear(passedOutYear);
+		candidate.setPercentage(percentage);
+		CandidateInfoBean can = candidateService.candidateInfoBeans(candidate);
+		if (can != null) {
+			talentHubtResponse.setStatusCode(200);
+			talentHubtResponse.setMessage("candidate registered successfully");
+		} else {
+			talentHubtResponse.setStatusCode(400);
+			talentHubtResponse.setMessage("not able to register");
+		}
+		return talentHubtResponse;
+	}
+}

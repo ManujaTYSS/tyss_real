@@ -1,0 +1,10 @@
+package com.tyss.talenthunt.service;
+
+
+import org.springframework.stereotype.Service;
+
+
+public class AddRequirmentServiceImpl {
+
+	
+}

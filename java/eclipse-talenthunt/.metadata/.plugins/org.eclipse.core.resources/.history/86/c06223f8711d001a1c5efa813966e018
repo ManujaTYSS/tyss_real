@@ -1,0 +1,49 @@
+package com.tyss.talenthunt.dto;
+
+import java.io.File;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+@Data
+@Entity
+@Table
+public class CandidateCreation {
+	@Id
+	@GeneratedValue
+	@Column
+	private  String candidateId;
+	@Column
+	private String candidateName;
+	@Column
+	private String email;
+	@Column
+	private long phoneNumber;
+	@Column
+	private String govtId;
+	@Column
+	private File uploadResume;
+	@Column
+	private String relocate;
+	@Column
+	private String candidateType;
+	@Column
+	private Date yop;
+	@Column
+	private double percentage;
+	@Column
+	private String currentDesignation;
+	@Column
+	private double yoe;
+	@Column
+	private double noticePeriod;
+	@Column
+	private double currentCTC ;
+	@Column
+	private String expectedCTC;
+}

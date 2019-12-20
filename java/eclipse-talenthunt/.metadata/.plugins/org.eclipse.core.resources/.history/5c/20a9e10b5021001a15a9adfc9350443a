@@ -1,0 +1,2 @@
+server.port=8084
+spring.mvc.servlet.load-on-startup=1

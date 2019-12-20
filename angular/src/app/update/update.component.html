@@ -1,0 +1,106 @@
+<nav class="navbar navbar-expand-lg navbar-warning bg-dark">
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">  
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/">Talent Hunt</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/form">Requirment Form</a>
+            </li>
+
+            <li class="nav-item">
+                    <a class="nav-link" routerLink="/update">update Form</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/candidateCreation">Create Candidate</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/getCandidate">GetCandidate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/scheduleInterview">Schedule Interview</a>
+                </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+<div class="container-fluid mt-5">
+    <div class="row">
+        <div class="col-md-4 offset-md-3">
+            <form action="" #reqform='ngForm' (ngSubmit)='addreq(reqform)' class="form-container">
+                <h1 style="text-align: center;color:blue;font-family: fantasy; "> Update Requirment!!</h1><br>
+                <div class="form-group">
+                    <input type="hidden" name='requirmentId' #requirmentId='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.requirmentId' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='client' #client='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.client' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='technology' #technology='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.technology' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='yoe' #yoe='ngModel' [(ngModel)]='RequirmentService.selectedRequirment.yoe'
+                        class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='location' #location='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.location' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="number" name='nop' #nop='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.nop' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='odate' #odate='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.odate' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='cdate' #cdate='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.cdate' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='role' #role='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.role' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='rate' #rate='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.rate' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='contact' #contact='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.contact' class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='jd' #jd='ngModel' [(ngModel)]='RequirmentService.selectedRequirment.jd'
+                        class="form-control">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='uname' #uname='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.uname' class="form-control"
+                        placeholder="enter updater name...">
+                </div>
+                <div class="form-group">
+                    <input type="text" name='time' #time='ngModel'
+                        [(ngModel)]='RequirmentService.selectedRequirment.time' class="form-control">
+                </div>
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-dark col-md-6 form-control float-right">Updated</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>

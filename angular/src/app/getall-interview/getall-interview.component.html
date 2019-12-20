@@ -1,0 +1,75 @@
+<nav class="navbar navbar-expand-lg navbar-warning bg-dark">
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">  
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/">Talent Hunt</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/form">Requirment Form</a>
+            </li>
+
+            <li class="nav-item">
+                    <a class="nav-link" routerLink="/update">update Form</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/candidateCreation">Create Candidate</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/getCandidate">GetCandidate</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/scheduleInterview">Schedule Interview</a>
+                </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+
+<div class="container ">
+    <table class="table table-striped table-inverse table-responsive mt-3 ">
+        <h1 style="color:black;font-family: fantasy;">Interview list</h1><br>
+
+        <thead class="thead-inverse bg-light">
+            <tr>
+                <th>Sl No</th>
+                <th>interviewId</th>
+                <th>createdDate</th>
+                <th>interviewlocation</th>
+                <th>interviewtype</th>
+                <th>skills</th>
+                <th>status</th>
+                <th>remarks</th>
+                <th>interviewer</th>
+                <th>RequirementId</th>
+               
+            </tr>
+        </thead>
+        <tbody class="bg-light">
+            <tr *ngFor='let user of interview; index as i'>
+                <td>{{i+1}}</td>
+                <td>{{user.interviewId}}</td>
+                <td>{{user.createdDate}}</td>
+                <td>{{user.interviewlocation}}</td>
+                <td>{{user.interviewtype}}</td>
+                <td>{{user.skills}}</td>
+                <td>{{user.status}}</td>
+                <td>{{user.remarks}}</td>
+                <td>{{user.interviewer}}</td>
+                <td>{{user.requirmentId}}</td>
+              
+            </tr>
+        </tbody>
+    </table>
+</div> 
+
+
+

@@ -1,0 +1,13 @@
+package com.tyss.talenthunt.dao;
+
+import java.util.List;
+
+import com.tyss.talenthunt.dto.AddRequirment;
+
+public interface AddRequirmentDAO {
+	public AddRequirment addrequirement(AddRequirment reqinfo);
+
+	public boolean updateRequirment(AddRequirment reqinfo);
+	
+	public List<AddRequirment> getAllRequirements();
+}

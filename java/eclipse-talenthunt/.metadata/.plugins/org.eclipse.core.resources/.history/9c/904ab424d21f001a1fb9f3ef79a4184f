@@ -1,0 +1,44 @@
+package com.tyss.talenthunt.dto;
+
+import java.time.LocalDate;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table
+public class ScheduleInterviewBean {
+	@Id
+	@Column(name = "interview_Id")
+	private int interviewId;
+	@Column(name = "created_Date")
+	@CreationTimestamp
+	private LocalDate createdDate;
+	@Column(name = "interview_location")
+	private String interviewlocation;
+	@Column(name = "interview_type")
+	private String interviewtype;
+	@Column(name = "status")
+	private String status;
+	@Column(name = "remarks")
+	private String remarks;
+	@Column(name = "interviewer")
+	private String interviewer;
+	
+//	 @OneToOne(cascade =  CascadeType.ALL)
+//	    @JoinColumn(name = "requirmentId")
+//	    private AddRequirment requirment;
+	 
+	 @OneToOne(cascade =  CascadeType.ALL, mappedBy = "interview")
+	 private AddRequirment requirment;
+}

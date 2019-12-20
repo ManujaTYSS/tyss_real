@@ -1,0 +1,15 @@
+package com.tyss.talenthunt.dto;
+
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Data
+@Entity
+@Table
+public class ScheduleInterviewBean {
+
+}
